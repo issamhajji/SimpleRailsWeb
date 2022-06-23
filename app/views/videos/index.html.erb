@@ -1,0 +1,98 @@
+<% if notice %>
+<div class="alert alert-success alert-dismissible fade show" id="notice" role="alert">
+  <%= notice %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% end %>
+
+<div class="container">
+    <div class="col">
+        <br>
+        <h3>Videos</h3>
+        <br>
+    </div>
+</div>   
+
+
+
+<!--<table class="table">
+  <thead>
+    <tr>
+      <th>Wistia</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%= video.wistia %></td>
+        <td><%= video.title %></td>
+        <td><%= video.description %></td>
+        <td><%= link_to 'Show', video %></td>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>-->
+
+<div class="container">
+<div class="row">
+<div class="col">
+<%= link_to new_video_path, :class => 'btn btn-primary' do %>
+  <i class="bi bi-plus-lg" style="font-size: 1rem; color: white;"></i>
+<% end %>
+</div>
+</div>
+<div class="row">
+<div class="col">
+<br>
+<div class="card">
+<div class="card-body">
+<div class="accordion accordion-flush" id="accordionFlush">
+  <% @videos.each do |video| %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-heading-<%= video.id %>">
+      <div class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= video.id %>" aria-expanded="false" aria-controls="flush-collapse-<%= video.id %>">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <%= video.title %>
+            </div>
+            <div class="col">
+              <span>
+                <%= link_to video do %>
+                  <i class="bi bi-eye-fill" style="font-size: 1.25rem; color: blue;"></i>
+                <% end %>
+              </span>
+            </div>
+            <div class="col">
+              <span>
+                <%= link_to edit_video_path(video) do %>
+                  <i class="bi bi-pencil-square" style="font-size: 1.25rem; color: blue;"></i>
+                <% end %>
+              </span>
+              <span>
+                <%= link_to video, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="bi bi-trash" style="font-size: 1.25rem; color: blue;"></i>
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </h2>
+    <div id="flush-collapse-<%= video.id %>" class="accordion-collapse collapse" aria-labelledby="flush-heading-<%= video.id %>" data-bs-parent="#accordionFlush">
+      <div class="accordion-body"><%= video.description %></div>
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,49 @@
+<% if notice %>
+<div class="alert alert-success alert-dismissible fade show" id="notice" role="alert">
+  <%= notice %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <nav class="nav flex-column">
+            <% Video.all.each do |video| %>
+              <%= link_to video.title, video, :class => 'nav-link' %>
+              <% end %>
+          </nav>
+        </div>  
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="card text-white bg-secondary" style="max-width: 100%;">
+        <div class="card-header"><%= @video.id %></div>
+          <div class="card">
+            <iframe src="//fast.wistia.net/embed/iframe/<%= @video.wistia %>" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen height="500px" width="auto"></iframe>
+          </div>
+        </div>
+        <br>
+      <div class="card" style="max-width: 100%">
+        <div class="card-body">
+          <h5 class="card-title"><%= @video.title %></h5>
+              <p class="card-text"><%= @video.description %></p>
+                <%= link_to "Prev", @prev_video if !@prev_video.nil? %>
+                <%= link_to "Next", @next_video if !@next_video.nil? %> |
+                <%= link_to 'Edit', edit_video_path(@video) %> |
+                <%= link_to 'Back', videos_path %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>  
+
+            <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
+            <script>
+              window._wq = window._wq || [];
+                _wq.push({ id: "<%= @video.wistia %>", onReady: function(video) {
+                  console.log("I got a handle to the video!", video);
+              }});
+            </script>
